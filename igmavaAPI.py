@@ -12,7 +12,7 @@ class Hello(Resource):
 
 api.add_resource(Hello, '/')
 
-
+print("http://146.83.216.218:8001/")
 if __name__ == '__main__':
      app.run(port='8001')
         
