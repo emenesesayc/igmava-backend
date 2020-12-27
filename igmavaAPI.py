@@ -10,11 +10,11 @@ class Hello(Resource):
 
 
 
-api.add_resource(Hello, '/hello')
+api.add_resource(Hello, '/')
 
-print("http://146.83.216.218:8002/")
+print("http://146.83.216.218:8008/")
 if __name__ == '__main__':
-     app.run(port='8002')
+     app.run(port='8008')
         
         
 #Ejemplos para tests:
