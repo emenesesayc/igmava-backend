@@ -10,7 +10,7 @@ class Hello(Resource):
 
 
 
-api.add_resource(Hello, '/')
+api.add_resource(Hello, '/hello')
 
 print("http://146.83.216.218:8001/")
 if __name__ == '__main__':
