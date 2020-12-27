@@ -8,8 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python -m py_compile igmavaAPI.py' 
-                stash(name: 'compiled-results', includes: 'sources/*.py*') 
+                sh 'sh 'pip install -r requirements.txt''
             }
         }
     }
