@@ -20,13 +20,14 @@ pipeline {
         }
         
         stage('deploy') {
-			steps {
+	    agent any
+	    steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
 				    sh 'python igmavaAPI.py'
                 }
    
-			}
-		}
+	    }
+	}
         
         
     }
