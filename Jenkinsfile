@@ -1,14 +1,21 @@
 pipeline {
-    agent none 
+    agent none
     stages {
-        stage('Build') { 
+        stage('Build') {
             agent {
                 docker {
-                    image 'python:3.8.3' 
+                    image 'python:3-alpine'
                 }
             }
             steps {
-                sh 'pip install -r requirements.txt'
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'pip install --user -r requirements.txt'
+                }
+            }
+            post {
+                always {
+                    sh 'python igmavaAPI.py'
+                }
             }
         }
     }
