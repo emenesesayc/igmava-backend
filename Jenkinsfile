@@ -10,25 +10,15 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'pip install --user -r requirements.txt'
+		    sh 'python igmavaAPI.py'
                 }
             }
             post {
                 always {
-                    echo 'Librerias Instaladas'
+                    echo 'Listoco'
                 }
             }
         }
-        
-        stage('deploy') {
-	    agent any
-	    steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-				    sh 'python igmavaAPI.py'
-                }
-   
-	    }
-	}
-        
-        
+         
     }
 }
