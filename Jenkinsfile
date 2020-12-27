@@ -14,9 +14,20 @@ pipeline {
             }
             post {
                 always {
-                    sh 'python igmavaAPI.py'
+                    echo 'Librerias Instaladas'
                 }
             }
         }
+        
+        stage('deploy') {
+			steps {
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+				    sh 'python igmavaAPI.py'
+                }
+   
+			}
+		}
+        
+        
     }
 }
