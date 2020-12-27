@@ -5,15 +5,10 @@ pipeline {
 	stages {
 		stage('build') {
 			steps {
-				sh 'virtualenv venv --distribute'
-				sh '. venv/bin/activate'
-				sh 'pip install -r requirements.txt'
+				sh 'docker-compose up'
+
 			}
 		}
-		stage('deploy') {
-			steps {
-				sh 'python igmavaAPI.py'
-			}
-		}
+
 	}
 }
