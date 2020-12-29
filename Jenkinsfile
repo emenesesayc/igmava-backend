@@ -26,12 +26,13 @@ pipeline {
 		    // After this you can call Python() anywhere from pipeline
 		    Python("-m pip install -r requirements.txt")
 		}  
+		sh '. pyenv/bin/activate' 
 		sh 'python igmavaAPI.py'    
 	    }
 	}
 	stage('Deploy') {
 		steps {
-		    sh '. pyenv/bin/activate'
+		    
 		    
 		    sh '. pyenv/bin/activate'
 		    sh 'FLASK_APP=igmavaAPI.py flask run --host 0.0.0.0 --port 8008'		
