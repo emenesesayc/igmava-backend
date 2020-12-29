@@ -40,7 +40,7 @@ pipeline {
 // Put this method outside pipeline
 def Python(String command) {
     if (env.ISUNIX == "TRUE") {
-        sh script:"source pyenv/bin/activate && python ${command}", label: "python ${command}"
+        sh script:". pyenv/bin/activate && python ${command}", label: "python ${command}"
     }
     else {
         powershell script:"pyenv\\Scripts\\Activate.ps1 ; python ${command}", label: "python ${command}"
