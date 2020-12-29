@@ -33,7 +33,7 @@ pipeline {
 		    sh 'FLASK_APP=igmavaAPI.py flask run --host 0.0.0.0 --port 8008'		
 		}		
 	}
-	    
+}	    
 	    
 // Several plugins like WithPyenv is not working perfectly accross platform when using Virtual Env.
 // Put this method outside pipeline
@@ -45,4 +45,4 @@ def Python(String command) {
         powershell script:"pyenv\\Scripts\\Activate.ps1 ; python ${command}", label: "python ${command}"
     }
 }
-}
+
