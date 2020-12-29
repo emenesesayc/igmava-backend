@@ -14,7 +14,7 @@ api.add_resource(Hello, '/')
 
 print("http://146.83.216.218:8008/")
 if __name__ == '__main__':
-     app.run(host='0.0.0.0',port='8008')
+     app.run(host='146.83.216.218',port='8008')
         
         
 #Ejemplos para tests:
