@@ -5,7 +5,7 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'pip install --user -r requirements.txt'
-		    sh 'python -m FLASK_APP=igmavaAPI.py flask run --host 0.0.0.0 --port 8008'
+		    sh 'python -m flask run --host 0.0.0.0 --port 8008 FLASK_APP=igmavaAPI.py'
                 }
             }
         }
