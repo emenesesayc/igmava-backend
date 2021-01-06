@@ -33,5 +33,7 @@ def create_app():
         init_webhooks(public_url)
 
     # ... Initialize Blueprints and the rest of our app
-
+    @app.route('/hello')
+    def hello():
+        return 'Hello, World!'
     return app
