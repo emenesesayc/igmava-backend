@@ -9,7 +9,6 @@ pipeline {
                     sh 'export USER=root && pip install --user -r requirements.txt' //aqui no creo que sea necesario pero por si las moscas
 		    sh 'ip address'
 		    sh 'export USER=root && export USE_NGROK=True && export FLASK_ENV=development && export FLASK_APP=groktest.py && python -m flask run'
-		    sh 'export FLASK_APP=igmavaAPI.py && python -m flask run --host 0.0.0.0 --port 8008'//forma alterna tampoco funca
                 }
             }
         }
