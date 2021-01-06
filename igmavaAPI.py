@@ -16,6 +16,8 @@ print("http://146.83.216.218:8008/")
 if __name__ == '__main__':
      app.run(host='0.0.0.0',port='8008')
         
+    
+#FLASK_APP=igmavaAPI.py flask run --host 0.0.0.0 --port 8008
         
 #Ejemplos para tests:
 #curl 127.0.0.1:5003/usuarios
