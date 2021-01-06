@@ -6,7 +6,6 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'unzip ngrok-stable-linux-amd64.zip'
 		    sh './ngrok authtoken 1mgbvqQdT8fXNrXKn0QOWiXqm7C_cAdE7VuRewUbtrW8w9nB'
-		    sh './ngrok http 80'
                     sh 'pip install --user -r requirements.txt'
 		    sh 'ip address'
 		    sh 'python igmavaAPI.py'
