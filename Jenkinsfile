@@ -12,6 +12,6 @@ node {
          sh "sudo docker build -t igmava ."
    }
    stage("run docker container"){
-        sh "sudo docker run -p 8000:8000 --name igmava -d igmava"
+        sh "sudo docker run -p 8008:80 --name igmava -d igmava"
     }
 }
