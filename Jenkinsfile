@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'docker run -dit --name igmava -p 8008:80 -v $(which docker):/usr/bin/docker'
+                sh 'pip install -r requirements.txt'
+                sh 'python src/main.py'
             }
         }
     }
