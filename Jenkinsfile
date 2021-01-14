@@ -1,13 +1,43 @@
 pipeline {
-    agent { docker { image 'python:3.8.3' } }
-    stages {
-        stage('build') {
+  agent none 
+  stages {
+    stage('Checkout, Test & Build') {
+        agent {
+          docker {
+            image 'wesbarnett/apache-flask:bionic-x86_64'
+            args '-p 3001:3000'
+          }
+        }
+        environment {
+          HOME = '.'
+        }
+        stages {
+          stage('Install') {
             steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'pip install --user -r requirements.txt'
-                    sh 'python src/main.py'
-                }
+              sh 'pip -r requirements.txt'
             }
+          }
+          stage('Archive') {
+            steps {
+              archiveArtifacts 'build/**'
+            }
+          }
         }
     }
+    stage('Deploy') {
+      agent {
+        label 'master'
+      }
+      options {
+        skipDefaultCheckout()
+      }
+      steps {
+        sh 'rm -rf /var/www/igmava'
+        sh 'mkdir /var/www/igmava'
+        sh 'cp -Rp build/** /var/www/igmava'
+        sh 'docker stop igmava || true && docker rm igmava || true'
+        sh 'docker run -dit --name igmava -p 8001:80 -v /var/www/igmava/:/usr/local/apache2/htdocs/ httpd:2.4'
+      }
+    }
+  }
 }

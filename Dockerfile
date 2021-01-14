@@ -1,12 +1,8 @@
-FROM python:3.8
+FROM wesbarnett/apache-flask:bionic-x86_64
 
-EXPOSE 8008
+COPY ./apache/* /etc/apache2/sites-available/
+RUN a2ensite igmava igmava-ssl
 
-WORKDIR /code
-COPY requirements.txt .
+# Copy application itself, changing ownership of files
+COPY --chown=www-data application /var/www/igamava/application
 
-RUN pip install -r requirements.txt
-
-COPY src/ .
-
-CMD ["python", "main.py"]
