@@ -1,32 +1,16 @@
 pipeline {
-  agent none 
-  stages {
-    stage('Checkout, Test & Build') {
-        agent {
-          docker {
-            image 'wesbarnett/apache-flask:bionic-x86_64'
-          }
-        }
-        environment {
-          HOME = '.'
-        }
-        stages {
-          stage('Install') {
+    agent { docker { image 'python:3.8.3' } }
+    stages {
+        stage('build') {
             steps {
-              sh 'pip install --user -r requirements.txt'
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+		    sh 'export USER=root && unzip ngrok-stable-linux-amd64.zip'
+		    sh 'export USER=root && ./ngrok authtoken 1mgbvqQdT8fXNrXKn0QOWiXqm7C_cAdE7VuRewUbtrW8w9nB'
+                    sh 'export USER=root && pip install --user -r requirements.txt' //aqui no creo que sea necesario pero por si las moscas
+		    sh 'ip address'
+		    sh 'export USER=root && export USE_NGROK=True && export FLASK_ENV=development && export FLASK_APP=groktest.py && python -m flask run'
+                }
             }
-          }
         }
     }
-    stage('Deploy') {
-      agent {
-        label 'master'
-      }
-      steps {
-        sh 'docker stop igmava || true && docker rm igmava || true'
-	sh 'docker build -t igmava .'
-        sh 'docker run -dit --name igmava -p 8009:80 -v /var/www/igmava/:/usr/local/apache2/htdocs/ httpd:2.4'
-      }
-    }
-  }
 }
