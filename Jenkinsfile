@@ -5,7 +5,6 @@ pipeline {
         agent {
           docker {
             image 'wesbarnett/apache-flask:bionic-x86_64'
-            args '-p 3001:3000'
           }
         }
         environment {
@@ -14,7 +13,7 @@ pipeline {
         stages {
           stage('Install') {
             steps {
-              sh 'pip -r requirements.txt'
+              sh 'pip install -r requirements.txt'
             }
           }
           stage('Archive') {
