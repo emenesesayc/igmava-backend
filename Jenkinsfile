@@ -24,6 +24,7 @@ pipeline {
       }
       steps {
         sh 'docker stop igmava || true && docker rm igmava || true'
+	sh 'docker build -t igmava .
         sh 'docker run -dit --name igmava -p 8009:80 -v /var/www/igmava/:/usr/local/apache2/htdocs/ httpd:2.4'
       }
     }
