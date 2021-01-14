@@ -4,12 +4,12 @@ from flask_restful import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 class Hello(Resource):
     def get(self):
         return "Hello World!!!"
 
-@app.route("/test")
+@app.route("/test", methods=['GET'])
 class Test(Resource):
     def get(self):
         return "Hello Worldi2!!!"
