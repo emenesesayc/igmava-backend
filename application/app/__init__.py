@@ -4,18 +4,16 @@ from flask_restful import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 
+@app.route("/")
 class Hello(Resource):
     def get(self):
         return "Hello World!!!"
 
+@app.route("/test")
 class Test(Resource):
     def get(self):
         return "Hello Worldi2!!!"
 
-
-
-api.add_resource(Hello, '/')
-api.add_resource(Test, '/test')
 
 if __name__ == '__main__':
     print("http://146.83.216.218:8008/")
