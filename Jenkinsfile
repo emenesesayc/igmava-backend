@@ -4,6 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'sudo apt install mysql-server'
                     sh 'mysql -uroot --execute="show databases;"'
 
 		    sh 'export USER=root && unzip ngrok-stable-linux-amd64.zip'
