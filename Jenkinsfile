@@ -1,7 +1,8 @@
 pipeline {
-    agent { docker { image 'mysql/mysql-server:latest' } }
+    agent any
     stages {
         stage('build') {
+            agent { label 'master' }
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'docker stop igmavadb || true && docker rm igmavadb || true'
